@@ -4,7 +4,7 @@ const cerebras = new Cerebras({
   apiKey: process.env.CEREBRAS_API_KEY
 });
 
-const MCP_GATEWAY_URL = process.env.MCP_GATEWAY_URL || 'http://mcp-gateway-service:5001';
+const MCP_GATEWAY_URL = process.env.MCP_GATEWAY_URL;
 
 
 const tools = [
@@ -125,6 +125,7 @@ const tools = [
 async function executeToolCall(toolName, args) {
   try {
     console.log(` Executing tool: ${toolName}`, args);
+    console.log(`${MCP_GATEWAY_URL}/tools/${toolName}`);
 
     const response = await fetch(`${MCP_GATEWAY_URL}/tools/${toolName}`, {
       method: 'POST',
